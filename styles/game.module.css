@@ -1,0 +1,41 @@
+.gameWrapper {
+    display: flex;
+    position: relative;
+    width: 700px;
+    height: 700px;
+    border: 1px solid;
+}
+
+.gameBoard {
+    display: flex;
+    position: relative;
+    border: 1px solid red;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-image: url("../public/spaceyo.jpg");
+}
+
+.playerUnit {
+    display: flex;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    background: green;
+    align-self: center;
+    margin-bottom: 5px;
+}
+
+.footer {
+    display: flex;
+    position: relative;
+    background:blue;
+    height: 50px;
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+    .gameWrapper {
+        width:350px;
+        height: 350px;
+    }
+}
