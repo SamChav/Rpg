@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/CreateCharacter.module.css";
+
+//file is small enough to not break into components, single page character creation
 const CreateCharacter = () => {
   const [playerCharacter, setPlayerCharacter] = useState({
     playerName: null,
@@ -12,23 +14,29 @@ const CreateCharacter = () => {
     dexterity: 2,
     agility: 2,
     vitality: 2,
-    intellect: 2
+    intellect: 2,
   });
   const [statPoints, setStatPoints] = useState();
 
-  useEffect(() => {  //this is simply to instantiate the 10 stat points at render, otherwise "10" will get counted twice, effectively setting 11 stat points
-    setStatPoints((prev) => 10)
-  }, [])
-
   useEffect(() => {
-    console.log(playerCharacter, "useeffect log");
-    
+    //this is simply to instantiate the 10 stat points at render, otherwise "10" will get counted twice, effectively setting 11 stat points
+    setStatPoints(() => 10);
+  }, []);
+
+  useEffect(() => { //this can be deleted after prod push
+    console.log(playerCharacter, "use effect log for development");
   }, [playerCharacter]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (statPoints != 0 || playerCharacter.playerClass === null || e.target.elements[19].value.length <= 0) {
-       return alert("you must pick a class, you must allocate your stat points, and you must enter a name")
+    if (
+      statPoints != 0 ||
+      playerCharacter.playerClass === null ||
+      e.target.elements[19].value.length <= 0
+    ) {
+      return alert(
+        "you must pick a class, you must allocate your stat points, and you must enter a name"
+      );
     } else {
       setPlayerCharacter((prev) => {
         let updaterObj = Object.assign({}, prev);
@@ -38,52 +46,51 @@ const CreateCharacter = () => {
     }
   };
 
-  const selectClass = (e) => {
+  const selectClass = (e) => { //class selection sets predefined stats and will update on given stats after this page
     setPlayerCharacter((prev) => {
       let updaterObj = Object.assign({}, prev);
       updaterObj.playerClass = e.target.textContent; //selected class target
       if (updaterObj.playerClass.toLowerCase() === "necromancer") {
-        updaterObj.spell = "Summon Dead"
-        updaterObj.weapon = "Cursed Wand"
-        updaterObj.hitPoints = 10
-        updaterObj.attack = 5
+        updaterObj.spell = "Summon Dead";
+        updaterObj.weapon = "Cursed Wand";
+        updaterObj.hitPoints = 10;
+        updaterObj.attack = 5;
       } else if (updaterObj.playerClass.toLowerCase() === "paladin") {
-        updaterObj.spell = "Righteous"
-        updaterObj.weapon = "Light Blade"
-        updaterObj.hitPoints = 15
-        updaterObj.attack = 8
+        updaterObj.spell = "Righteous";
+        updaterObj.weapon = "Light Blade";
+        updaterObj.hitPoints = 15;
+        updaterObj.attack = 8;
       } else if (updaterObj.playerClass.toLowerCase() === "warrior") {
-        updaterObj.spell = null
-        updaterObj.weapon = "Brutal Axe"
-        updaterObj.hitPoints = 30
-        updaterObj.attack = 15
+        updaterObj.spell = null;
+        updaterObj.weapon = "Brutal Axe";
+        updaterObj.hitPoints = 30;
+        updaterObj.attack = 15;
       } else if (updaterObj.playerClass.toLowerCase() === "ranger") {
-        updaterObj.spell = null
-        updaterObj.weapon = "Grove Blessed Bow"
-        updaterObj.hitPoints = 15
-        updaterObj.attack = 10
+        updaterObj.spell = null;
+        updaterObj.weapon = "Grove Blessed Bow";
+        updaterObj.hitPoints = 15;
+        updaterObj.attack = 10;
       } else {
-        updaterObj.spell = null
+        updaterObj.spell = null;
       }
       return updaterObj;
     });
   };
 
-  const addStat = (e) => {
+  const addStat = (e) => { //add stat using DRY method
     let currentStat = e.target.parentElement.lastChild.innerText.toLowerCase();
     if (statPoints <= 0) {
       return;
     } else {
       setPlayerCharacter((prev) => {
         let updaterObj = Object.assign({}, prev);
-          updaterObj[currentStat]++;
-          setStatPoints(statPoints--);
-          return updaterObj;
+        updaterObj[currentStat]++;
+        setStatPoints(statPoints--);
+        return updaterObj;
       });
     }
-    
   };
-  const subtractStat = (e) => {
+  const subtractStat = (e) => { //subtract stat using DRY method
     let currentStat = e.target.parentElement.lastChild.innerText.toLowerCase();
     if (statPoints === 10 || statPoints < 0) {
       return;
@@ -91,17 +98,14 @@ const CreateCharacter = () => {
       setPlayerCharacter((prev) => {
         let updaterObj = Object.assign({}, prev);
         if (updaterObj[currentStat] >= 3) {
-          updaterObj[currentStat]-- 
+          updaterObj[currentStat]--;
           setStatPoints(statPoints++);
-          return updaterObj;       
-                 
+          return updaterObj;
         } else {
-            return updaterObj;
+          return updaterObj;
         }
-        
       });
     }
-    
   };
 
   return (
@@ -110,31 +114,47 @@ const CreateCharacter = () => {
         <div className={styles.classDiv}>
           <form className={styles.classForm} onSubmit={handleSubmit}>
             <ul className={styles.ul}>
-            <p>Class: {playerCharacter.playerClass}</p>
+              <p>Class: {playerCharacter.playerClass}</p>
               <li className={styles.li}>
                 <label className={styles.li}>
-                  <button onClick={selectClass} type="button" className={styles.classButton}>
+                  <button
+                    onClick={selectClass}
+                    type="button"
+                    className={styles.classButton}
+                  >
                     Warrior
                   </button>
                 </label>
               </li>
               <li className={styles.li}>
                 <label className={styles.li}>
-                  <button onClick={selectClass} type="button" className={styles.classButton}>
+                  <button
+                    onClick={selectClass}
+                    type="button"
+                    className={styles.classButton}
+                  >
                     Paladin
                   </button>
                 </label>
               </li>
               <li className={styles.li}>
                 <label className={styles.li}>
-                  <button onClick={selectClass} type="button" className={styles.classButton}>
+                  <button
+                    onClick={selectClass}
+                    type="button"
+                    className={styles.classButton}
+                  >
                     Necromancer
                   </button>
                 </label>
               </li>
               <li className={styles.li}>
                 <label className={styles.li}>
-                  <button onClick={selectClass} type="button" className={styles.classButton}>
+                  <button
+                    onClick={selectClass}
+                    type="button"
+                    className={styles.classButton}
+                  >
                     Ranger
                   </button>
                 </label>
@@ -152,7 +172,11 @@ const CreateCharacter = () => {
                   >
                     -
                   </button>
-                  <button className={styles.incrementStat} type="button" onClick={addStat}>
+                  <button
+                    className={styles.incrementStat}
+                    type="button"
+                    onClick={addStat}
+                  >
                     +
                   </button>
                   <input
@@ -172,7 +196,11 @@ const CreateCharacter = () => {
                   >
                     -
                   </button>
-                  <button className={styles.incrementStat} type="button" onClick={addStat}>
+                  <button
+                    className={styles.incrementStat}
+                    type="button"
+                    onClick={addStat}
+                  >
                     +
                   </button>
                   <input
@@ -192,7 +220,11 @@ const CreateCharacter = () => {
                   >
                     -
                   </button>
-                  <button className={styles.incrementStat} type="button" onClick={addStat}>
+                  <button
+                    className={styles.incrementStat}
+                    type="button"
+                    onClick={addStat}
+                  >
                     +
                   </button>
                   <input
@@ -212,7 +244,11 @@ const CreateCharacter = () => {
                   >
                     -
                   </button>
-                  <button className={styles.incrementStat} type="button" onClick={addStat}>
+                  <button
+                    className={styles.incrementStat}
+                    type="button"
+                    onClick={addStat}
+                  >
                     +
                   </button>
                   <input
@@ -232,7 +268,11 @@ const CreateCharacter = () => {
                   >
                     -
                   </button>
-                  <button className={styles.incrementStat} type="button" onClick={addStat}>
+                  <button
+                    className={styles.incrementStat}
+                    type="button"
+                    onClick={addStat}
+                  >
                     +
                   </button>
                   <input

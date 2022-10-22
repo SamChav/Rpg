@@ -1,0 +1,76 @@
+.root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../public/undeadWallpaper.png")
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.loginSheet {
+    display: flex;
+    width: 1000px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, .8);
+    border-radius: 5px;
+    color: white;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.nameAndPass {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.buttonContainer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 10px 100px 10px;
+    width: 100%;
+    align-self: flex-end;
+    text-align: center;
+}
+
+.button {
+    width: 250px;
+    height: fit-content;
+    border: 0px;
+    background: rgba(0, 0, 0, .9);
+    border-radius: 10px;
+    color: white;
+    transition: ease-in-out .05s;
+    cursor: pointer;
+    position: relative;
+    margin: 0px auto;
+}
+.button:hover {
+    cursor: pointer;
+    scale: 1.05;
+}
+.button:active {
+    scale: .98;
+}
