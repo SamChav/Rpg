@@ -1,1 +1,1 @@
-<h1> Work in progress 10/21/2022, charater creation is complete</h1>
+<h1> Work in progress 10/25/2022, charater creation is complete, login logic is there, need to implement hash/salt</h1>
