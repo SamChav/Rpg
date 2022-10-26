@@ -9,6 +9,7 @@ const CreateCharacter = () => {
     hitPoints: null,
     weapon: null,
     attack: 0,
+    defense: 0,
     spell: null,
     strength: 2,
     dexterity: 2,
@@ -55,21 +56,25 @@ const CreateCharacter = () => {
         updaterObj.weapon = "Cursed Wand";
         updaterObj.hitPoints = 10;
         updaterObj.attack = 5;
+        updaterObj.defense = 3;
       } else if (updaterObj.playerClass.toLowerCase() === "paladin") {
         updaterObj.spell = "Righteous";
         updaterObj.weapon = "Light Blade";
         updaterObj.hitPoints = 15;
         updaterObj.attack = 8;
+        updaterObj.defense = 7;
       } else if (updaterObj.playerClass.toLowerCase() === "warrior") {
         updaterObj.spell = null;
         updaterObj.weapon = "Brutal Axe";
         updaterObj.hitPoints = 30;
         updaterObj.attack = 15;
+        updaterObj.defense = 10;
       } else if (updaterObj.playerClass.toLowerCase() === "ranger") {
         updaterObj.spell = null;
         updaterObj.weapon = "Grove Blessed Bow";
         updaterObj.hitPoints = 15;
         updaterObj.attack = 10;
+        updaterObj.defense = 6;
       } else {
         updaterObj.spell = null;
       }
@@ -114,7 +119,7 @@ const CreateCharacter = () => {
         <div className={styles.classDiv}>
           <form className={styles.classForm} onSubmit={handleSubmit}>
             <ul className={styles.ul}>
-              <p>Class: {playerCharacter.playerClass}</p>
+              Class: {playerCharacter.playerClass}
               <li className={styles.li}>
                 <label className={styles.li}>
                   <button

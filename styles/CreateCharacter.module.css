@@ -171,5 +171,38 @@
     justify-content: center;
 }
 
+@media (max-width: 800px) {
+    .classDiv {
+        width: 500px;
+        height: 300px;
+    }
+    .classForm > * {
+        font-size: medium;
+    } 
+    .classButton {
+        font-size: medium;
+    }
+    .incrementStat {
+        width: 20px;
+        height: 20px;
+        font-size: large;
+    }
+    .decrementStat {
+        width: 20px;
+        height: 20px;
+        font-size: large;
+    }
+    .li > * {
+        font-size: medium;
+    }
+    .li > input {
+        height: 20px;
+        width: 20px;
+    }
+    .classForm > p {
+        font-size: medium;
+    }
+}
+
 
 
